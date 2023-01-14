@@ -1,0 +1,19 @@
+{% load static %}
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>{% block title %}{% endblock %}</title>
+  {% block extrastyle %}{% endblock %}
+  {% tailwind_css %}
+</head>
+
+<body>
+  base index
+  <p class="text-xl ...">The quick brown fox ...</p>
+</body>
+
+</html>
