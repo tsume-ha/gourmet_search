@@ -1,1 +1,10 @@
-near search html template
+{% extends 'near_search/base.html' %}
+{% load static %}
+
+{% block title %}グルメサーチ{% endblock %}
+
+{% block body %}
+body here
+<p class="text-xl ...">The quick brown fox ...</p>
+<a href="{% url 'near_search:search' %}">検索一覧</a>
+{% endblock %}

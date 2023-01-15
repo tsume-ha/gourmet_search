@@ -1,0 +1,14 @@
+{% extends 'near_search/base.html' %}
+{% load static %}
+
+{% block title %}グルメサーチ | 検索結果一覧{% endblock %}
+
+{% block body %}
+<ul>
+  {% for shop in object_list %}
+      <li>{{ shop.id }}</li>
+  {% empty %}
+      <li>No articles yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
