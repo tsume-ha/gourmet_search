@@ -11,26 +11,27 @@
   <p class="w-full sm:w-96 mx-auto text-center my-8">
     ホットペッパーグルメのAPIを利用して、現在地付近のレストランを検索します。<br>
   </p>
-  <form action="{% url 'near_search:search' %}" method="get"
+  <form action="{% url 'near_search:search' %}" method="get" onsubmit="validate()"
     class="w-full md:w-3/4 mx-auto my-5 p-8 rounded shadow-lg"
   >
     <div class="grid grid-cols-2 gap-4">
       <div class="">
         <label for="lat" class="text-xs">緯度</label>
-        <input type="number" name="lat" readonly
+        <input type="number" name="lat" id="lat" readonly
           placeholder="35.669220"
           class="form-control rounded inline-block w-full"
           >
       </div>
       <div class="">
         <label for="lng" class="text-xs">経度</label>
-        <input type="number" name="lng" readonly
+        <input type="number" name="lng" id="lng" readonly
           placeholder="139.761457"
           class="form-control rounded inline-block w-full"
           >
       </div>
       <button
         type="button"
+        onclick="getLocation()"
         class="px-6
           py-2.5
           bg-blue-600
@@ -108,4 +109,22 @@
     </div>
   </form>
 </main>
+
+<script type="text/javascript">
+// Location APIを利用して現在地を取得する
+const getLocation = () => {
+  if('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latElm = document.getElementById("lat");
+      const lngElm = document.getElementById("lng");
+      latElm.value = position.coords.latitude;
+      lngElm.value = position.coords.longitude;
+      return;
+    });
+  } else {
+    console.error("Geolocation APIが利用不可")
+    alert("現在地を取得できませんでした")
+  }
+}
+</script>
 {% endblock %}
