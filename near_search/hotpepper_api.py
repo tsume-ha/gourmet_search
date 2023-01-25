@@ -21,6 +21,7 @@ class API:
         s.genre_name = elem.find("hp:genre", self.ns).find("hp:name", self.ns).text
         s.genre_catch = elem.find("hp:genre", self.ns).find("hp:catch", self.ns).text
         s.photo_url = elem.find("hp:photo", self.ns).find("hp:pc", self.ns).find("hp:l", self.ns).text
+        s.url = elem.find("hp:urls", self.ns).find("hp:pc", self.ns).text
         print(s)
         return s
 
@@ -36,6 +37,7 @@ class API:
                     "close": shop.close,
                     "catch": shop.catch,
                     "access": shop.access,
+                    "url": shop.url,
                     "genre_name": shop.genre_name,
                     "genre_catch": shop.genre_catch,
                 }

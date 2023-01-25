@@ -12,6 +12,7 @@ class Shop(models.Model):
     genre_name = models.CharField(max_length=100, null=True)
     genre_catch = models.CharField(max_length=100, null=True)
     parking = models.CharField(max_length=100, null=True)
+    url = models.URLField(null=True)
     
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
