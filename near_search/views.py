@@ -1,7 +1,9 @@
 import urllib.parse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.core.exceptions import SuspiciousOperation
+from django.http import Http404
 from .forms import ShopSearchForm
+from .models import Shop
 from .hotpepper_api import API
 
 class TopPageView(TemplateView):
@@ -63,5 +65,17 @@ class ShopListView(ListView):
         return context
 
 
-class ShopView(TemplateView):
+class ShopView(DetailView):
     template_name = "near_search/shop.html"
+    model = Shop
+
+    def get_object(self, queryset=None):
+        try:
+            return super().get_object(queryset)
+        except Http404:
+            print("直接個別ページにアクセスしたため、APIから取得し直します。")
+            hotpepper = API()
+            shop = hotpepper.getShopById(self.kwargs.get(self.pk_url_kwarg))
+            if shop is None:
+                raise Http404()
+            return shop

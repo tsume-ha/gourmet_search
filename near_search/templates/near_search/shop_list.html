@@ -13,7 +13,7 @@
     {% for shop in object_list %}
     <li class=" w-full sm:max-w-full sm:flex my-5">
       <div class="h-48 sm:h-auto sm:w-48 flex-none bg-cover bg-center rounded-t sm:rounded-t-none sm:rounded-l text-center overflow-hidden"
-        style="background-image: url('{{ shop.photo_url }}')" title="Mountain">
+        style="background-image: url('{{ shop.photo_url }}')" title="{{ shop.name }}">
       </div>
       <div class="w-full shadow-md bg-white rounded-b sm:rounded-b-none sm:rounded-r px-4 pb-4 leading-normal">
         <div class="mb-1 py-1">
