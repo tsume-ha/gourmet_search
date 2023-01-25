@@ -5,15 +5,19 @@ from django.conf import settings
 class Shop:
     id: str = ""
     name: str = ""
-    logo_image: str = ""
+    photo_url: str = ""
     address: str = ""
     open: str = ""
     close: str = ""
+    catch: str = ""
+    access: str = ""
+    genre_name: str = ""
+    genre_catch: str = ""
 
     def __str__(self) -> str:
         return f"{self.name} (id: {self.id})"
 
-    
+
 class API:
     API_KEY = settings.HOTPEPPER_API_KEY
     ns = {# name space
@@ -24,10 +28,14 @@ class API:
         s = Shop()
         s.id = elem.find("hp:id", self.ns).text
         s.name = elem.find("hp:name", self.ns).text
-        s.logo_image = elem.find("hp:logo_image", self.ns).text
         s.address = elem.find("hp:address", self.ns).text
         s.open = elem.find("hp:open", self.ns).text
         s.close = elem.find("hp:close", self.ns).text
+        s.catch = elem.find("hp:catch", self.ns).text
+        s.access = elem.find("hp:access", self.ns).text
+        s.genre_name = elem.find("hp:genre", self.ns).find("hp:name", self.ns).text
+        s.genre_catch = elem.find("hp:genre", self.ns).find("hp:catch", self.ns).text
+        s.photo_url = elem.find("hp:photo", self.ns).find("hp:pc", self.ns).find("hp:l", self.ns).text
         print(s)
         return s
 

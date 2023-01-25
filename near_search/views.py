@@ -61,3 +61,7 @@ class ShopListView(ListView):
         }
         context["paginator_urls"] = paginator_urls
         return context
+
+
+class ShopView(TemplateView):
+    template_name = "near_search/shop.html"

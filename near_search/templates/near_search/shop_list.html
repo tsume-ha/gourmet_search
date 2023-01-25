@@ -5,18 +5,43 @@
 
 {% block body %}
 <main class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+  <a href="{% url 'near_search:index' %}" class="text-gray-700 pt-8 inline-block">トップへ戻る</a>
   <h2 class="text-lg text-center my-8">
     検索結果一覧
   </h2>
   <ul>
     {% for shop in object_list %}
-        <li>{{ shop.id }}</li>
+    <li class=" w-full sm:max-w-full sm:flex my-5">
+      <div class="h-48 sm:h-auto sm:w-48 flex-none bg-cover bg-center rounded-t sm:rounded-t-none sm:rounded-l text-center overflow-hidden"
+        style="background-image: url('{{ shop.photo_url }}')" title="Mountain">
+      </div>
+      <div class="w-full shadow-md bg-white rounded-b sm:rounded-b-none sm:rounded-r px-4 pb-4 leading-normal">
+        <div class="mb-1 py-1">
+          <h3 class="text-gray-900 font-bold text-xl mb-2">
+            <a href="{% url 'near_search:shop' shop.id %}" class="underline">{{ shop.name }}</a></h3>
+          <p class="text-gray-700 text-sm my-1">{{ shop.genre_name }} > {{ shop.genre_catch }}</p>
+          <p class="text-gray-700 text-sm">{{ shop.catch }}</p>
+        </div>
+        <div>
+          <span class="text-xs">アクセス</span>
+          <p class="text-xs pl-3">{{ shop.access }}</p>
+        </div>
+        <div>
+          <span class="text-xs">営業時間</span>
+          <p class="text-xs pl-3">{{ shop.open }}</p>
+        </div>
+        <div>
+          <span class="text-xs">定休日</span>
+          <p class="text-xs pl-3">{{ shop.close }}</p>
+        </div>
+      </div>
+    </li>
     {% empty %}
         <li>No articles yet.</li>
     {% endfor %}
   </ul>
 
-  <div class="w-full text-center">
+  <div class="w-full text-center my-10">
     <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
       <a href="{{ paginator_urls.prev }}" class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
         <span class="sr-only">Previous</span>
@@ -64,5 +89,7 @@
       </a>
     </nav>
   </div>
+  
+  <div class="text-center my-8">Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a></div>
 </main>
 {% endblock %}
