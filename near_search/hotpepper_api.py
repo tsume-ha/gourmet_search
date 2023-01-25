@@ -6,9 +6,13 @@ class Shop:
     id: str = ""
     name: str = ""
     logo_image: str = ""
+    address: str = ""
+    open: str = ""
+    close: str = ""
 
     def __str__(self) -> str:
         return f"{self.name} (id: {self.id})"
+
     
 class API:
     API_KEY = settings.HOTPEPPER_API_KEY
@@ -21,17 +25,20 @@ class API:
         s.id = elem.find("hp:id", self.ns).text
         s.name = elem.find("hp:name", self.ns).text
         s.logo_image = elem.find("hp:logo_image", self.ns).text
+        s.address = elem.find("hp:address", self.ns).text
+        s.open = elem.find("hp:open", self.ns).text
+        s.close = elem.find("hp:close", self.ns).text
         print(s)
         return s
 
 
-    def getShopList(self, params):
+    def getShopList(self, params, shop_start_num=1):
         URL = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
         print(params)
         print("API calling start")
         res = requests.get(
             url=URL,
-            params={**params, **{"key": self.API_KEY}}
+            params={**params, **{"key": self.API_KEY, "start": shop_start_num}}
         )
         print("API calling end")
         res_tree = ET.fromstring(res.text)
@@ -51,4 +58,9 @@ class API:
         
         shops = [self._shop_parse(shop_elem) for shop_elem in res_tree.findall("hp:shop", self.ns)]
     
-        return shops
+        return {
+            "shops": shops,
+            "total_shop_num": int(total_shop_num),
+            "shop_num": int(shop_num),
+            "shop_start_num": int(shop_start_num)
+            }
