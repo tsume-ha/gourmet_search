@@ -138,3 +138,6 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# hotpepper api key
+HOTPEPPER_API_KEY = env("HOTPEPPER_API_KEY")

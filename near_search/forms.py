@@ -12,6 +12,8 @@ class RangeChoices(models.IntegerChoices):
     R3000m = 5
 
 class ShopSearchForm(forms.Form):
+    # フィールドの名前はそのままAPIに流すので、APIのキーと同じにしておく
     lat = forms.FloatField(initial=35.669220, help_text="緯度")
     lng = forms.FloatField(initial=139.761457, help_text="経度")
-    range = forms.ChoiceField(choices=RangeChoices.choices, initial=RangeChoices.R1000m)
+    range = forms.ChoiceField(choices=RangeChoices.choices, initial=RangeChoices.R1000m, required=False)
+    keyword	 = forms.CharField(max_length=256, required=False)

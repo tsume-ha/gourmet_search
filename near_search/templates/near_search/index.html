@@ -17,14 +17,14 @@
     <div class="grid grid-cols-2 gap-4">
       <div class="">
         <label for="lat" class="text-xs">緯度</label>
-        <input type="number" name="lat" id="lat" readonly
+        <input type="number" name="lat" id="lat" step="0.000001"
           placeholder="35.669220"
           class="form-control rounded inline-block w-full"
           >
       </div>
       <div class="">
         <label for="lng" class="text-xs">経度</label>
-        <input type="number" name="lng" id="lng" readonly
+        <input type="number" name="lng" id="lng" step="0.000001"
           placeholder="139.761457"
           class="form-control rounded inline-block w-full"
           >
@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="my-5">
-      <input type="text" name="text" placeholder="検索キーワード"
+      <input type="text" name="keyword" placeholder="検索キーワード"
         class="form-control rounded inline-block w-full"
       >
     </div>
@@ -108,6 +108,7 @@
       検索</button>
     </div>
   </form>
+  <div class="text-center my-8">Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a></div>
 </main>
 
 <script type="text/javascript">
